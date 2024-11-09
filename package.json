@@ -1,19 +1,29 @@
 {
   "name": "backend-fivem",
   "version": "1.0.0",
+  "description": "API backend for FiveM server data management",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "FiveM",
+    "API",
+    "server",
+    "express",
+    "backend"
+  ],
+  "author": "Daffa",
   "license": "ISC",
-  "description": "",
   "dependencies": {
     "axios": "^1.7.7",
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "https": "^1.0.0",
     "sharp": "^0.33.5"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }
