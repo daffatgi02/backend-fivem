@@ -66,10 +66,17 @@ const getDiscordDetails = async (discordId) => {
     const response = await axios.get(`https://discordlookup.mesalytic.moe/v1/user/${discordId}`);
     if (response.data) {
       const { id, username, avatar } = response.data;
+      
+      // Periksa apakah avatar dan avatar.id valid
+      let avatarUrl = "https://i.imgur.com/vneLxLB.png";
+      if (avatar && avatar.id) {
+        avatarUrl = `https://cdn.discordapp.com/avatars/${id}/${avatar.id}`;
+      }
+      
       return {
         id,
         username,
-        avatarUrl: avatar ? `https://cdn.discordapp.com/avatars/${id}/${avatar.id}` : "https://via.placeholder.com/64",
+        avatarUrl
       };
     }
   } catch (error) {
@@ -77,6 +84,7 @@ const getDiscordDetails = async (discordId) => {
     return null;
   }
 };
+
 
 async function getImageSize(imageUrl) {
   try {
@@ -156,7 +164,7 @@ async function syncServerData() {
     };
 
     cache.set('serverDetail', serverDetail);
-    console.log('Data server berhasil disinkronisasi.');
+    // console.log('Data server berhasil disinkronisasi.');
   } catch (error) {
     failCount++;
     console.error(`Sinkronisasi gagal ${failCount} kali:`, error.message);
